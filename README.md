@@ -6,6 +6,51 @@ Ranks a corpus of resumes against one job role using [TypeSafe AI's Jev](https:/
 Jev supplies judgement. **All composition, thresholds and ordering live in TypeScript.**
 Jev scores one resume at a time; it never sees the corpus and never produces the leaderboard.
 
+## Demo
+
+A full pass: load the corpus, rank it, open a candidate, inspect the per-requirement
+probabilities, and see the must-have gate filter someone out.
+
+https://github.com/NesanSelvan/resume-ranker-jev/raw/main/readme/demo.mp4
+
+<video src="https://github.com/NesanSelvan/resume-ranker-jev/raw/main/readme/demo.mp4" poster="readme/demo-poster.png" controls width="100%"></video>
+
+### Setup — one role, one corpus
+
+Requirements are free text, one per line; `!` marks a hard gate and `#` marks a note that is
+never scored. Every resume in the corpus is a document tile carrying the first lines of its
+own extracted text, so a bad extraction is visible before a run starts.
+
+![Setup screen with the corpus rail and the role requirements](readme/01-setup.png)
+
+### Ranked results
+
+Six rated dimensions per candidate, a requirement wheel, and a composite score ring. Weights
+re-sort the list in the browser without re-scoring anything.
+
+![Ranked candidate cards with rating bars and score rings](readme/02-ranked.png)
+
+### The candidate drawer
+
+The full breakdown sits beside the original document, so every number can be checked against
+the page it came from. Each rating carries the model's confidence.
+
+![Candidate drawer showing ratings beside the original PDF](readme/03-drawer.png)
+
+### Per-requirement probabilities
+
+One `noul()` call per requirement line, with the probability kept and shown. Must-haves are
+drawn taller than the rest.
+
+![Requirement breakdown listing each requirement with its probability](readme/04-requirements.png)
+
+### The gate, and what it costs
+
+A candidate who misses a must-have is moved to a Filtered tab **with the reason shown** — never
+deleted. For a DOCX, the drawer shows the extracted text, which is exactly what the scorer read.
+
+![A gated candidate beside the extracted text the scorer saw](readme/05-gated.png)
+
 ## How it works
 
 ```
