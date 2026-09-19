@@ -11,9 +11,9 @@ Jev scores one resume at a time; it never sees the corpus and never produces the
 A full pass: load the corpus, rank it, open a candidate, inspect the per-requirement
 probabilities, and see the must-have gate filter someone out.
 
-https://github.com/NesanSelvan/resume-ranker-jev/raw/main/readme/demo.mp4
+[![Watch the 30-second demo](readme/demo-poster.png)](https://github.com/NesanSelvan/resume-ranker-jev/blob/main/readme/demo.mp4)
 
-<video src="https://github.com/NesanSelvan/resume-ranker-jev/raw/main/readme/demo.mp4" poster="readme/demo-poster.png" controls width="100%"></video>
+▶ **[Play the demo](https://github.com/NesanSelvan/resume-ranker-jev/blob/main/readme/demo.mp4)** — 30s, or click the still above.
 
 ### Setup — one role, one corpus
 
