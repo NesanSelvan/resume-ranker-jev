@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/**
+ * Light theme — "Data-Dense Dashboard" with Minimal Swiss typography.
+ *
+ * Every text token clears WCAG AA (4.5:1) measured against the PAGE
+ * background (#f7f8fa) — the worse of the two surfaces. A token checked only
+ * against a white card passes there and fails on the header and stat labels,
+ * which sit on the page.
+ *
+ * The dark theme's semantic colours could not be reused: on white its green
+ * measured 2.58:1, its amber 2.25:1 and its red 3.45:1, all below AA. All
+ * three are replaced with 700-level equivalents.
+ */
+@theme {
+  /* Surfaces. Page is a hair off-white so white cards read as raised. */
+  --color-bg: #f7f8fa;
+  --color-panel: #ffffff;
+  --color-raised: #f1f4f8;
+  --color-line: #e2e8f0;
+  --color-line-soft: #edf1f6;
+
+  /* Text. */
+  --color-ink: #0f172a; /* 16.8:1 */
+  --color-muted: #475569; /* 7.1:1 */
+  --color-faint: #616e83; /* 4.9:1 — slate-500 lands at 4.48 and misses AA */
+
+  /* One accent, for the primary action and the leading rank only. */
+  --color-accent: #4f46e5; /* 5.9:1; a white label on it is 6.3:1 */
+
+  /* Semantics. Always paired with an icon or word, never colour alone. */
+  --color-pass: #15803d; /* 4.7:1 */
+  --color-warn: #b45309; /* 4.7:1 */
+  --color-fail: #dc2626; /* 4.5:1 */
+
+  /* Neutral fill for data bars — deliberately not the ink colour, which
+     reads as a solid black slab at these widths. */
+  --color-bar: #616e83;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* One elevation scale. Light UI needs real shadows; white-on-white has no
+     other way to express depth. */
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.05), 0 4px 12px rgb(15 23 42 / 0.08);
+  --shadow-pop: 0 12px 28px rgb(15 23 42 / 0.12), 0 2px 8px rgb(15 23 42 / 0.08);
+}
+
+/* Dark remains available; the two themes are defined together so tokens never
+   drift apart. Light is the default. */
+:root[data-theme="dark"] {
+  --color-bg: #09090b;
+  --color-panel: #0e0e11;
+  --color-raised: #15151a;
+  --color-line: #222228;
+  --color-line-soft: #1a1a20;
+  --color-ink: #ededf0;
+  --color-muted: #9ca3af;
+  --color-faint: #7c7c87;
+  --color-accent: #8b7cf6;
+  --color-pass: #4ade80;
+  --color-warn: #fbbf24;
+  --color-fail: #f87171;
+  --color-bar: #9ca3af;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-card-hover: 0 2px 10px rgb(0 0 0 / 0.55);
+  --shadow-pop: 0 16px 40px rgb(0 0 0 / 0.6);
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Numbers must line up in a dense list. */
+.nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 22%, transparent);
+}
+
+/* Visible focus for keyboard users — never removed. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: var(--color-line);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--color-panel);
+  border: 1.5px solid var(--color-faint);
+  box-shadow: var(--shadow-card);
+  cursor: grab;
+  transition:
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+  border-color: var(--color-accent);
+}
+input[type="range"]:active::-webkit-slider-thumb {
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+  cursor: grabbing;
+}
+
+/* The thumbnail's text fades out at the foot of the page rather than being cut
+   through a line of type, which reads as a rendering bug. */
+.doc-preview {
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+}
+
+/* The dog-eared corner on a document tile. Drawn as one gradient so the tile
+   stays a single element — a pseudo-element with a rotated border fringes at
+   fractional device pixel ratios. */
+.doc-fold {
+  background: linear-gradient(
+    225deg,
+    var(--color-raised) 0 44%,
+    var(--color-line) 44% 52%,
+    transparent 52%
+  );
+}
+
+/* A horizontal rail: no scrollbar chrome, edges faded so a cut-off chip reads
+   as "more to the right" rather than as a clipping bug. */
+.rail {
+  --fade-start: 0px;
+  --fade-end: 0px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--fade-start),
+    #000 calc(100% - var(--fade-end)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--fade-start),
+    #000 calc(100% - var(--fade-end)),
+    transparent 100%
+  );
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+/* Respect the system setting; no animation is worth motion sickness. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

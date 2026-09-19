@@ -1,0 +1,25 @@
+node_modules
+.next
+.env
+.env.local
+data/app.db
+data/app.db-*
+data/uploads/*
+!data/uploads/.gitkeep
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets — never commit a real credential file
+.env*
+!.env.example
+
+# Local agent workspace: personal design notes and machine-local settings
+.claude/
+
+# A separate tool's own repo and database, nested inside this project
+.devcli/
+
+# Generated corpus: `pnpm fixtures` reproduces it deterministically
+data/fixtures/
+
+.DS_Store
