@@ -6,15 +6,6 @@ Ranks a corpus of resumes against one job role using [TypeSafe AI's Jev](https:/
 Jev supplies judgement. **All composition, thresholds and ordering live in TypeScript.**
 Jev scores one resume at a time; it never sees the corpus and never produces the leaderboard.
 
-## Demo
-
-A full pass: load the corpus, rank it, open a candidate, inspect the per-requirement
-probabilities, and watch the must-have gate filter someone out. Plays in place, 1.4x.
-
-![Loading the corpus, ranking it, and opening a candidate](readme/demo.gif)
-
-<sub>Full-resolution H.264 copy: [readme/demo.mp4](readme/demo.mp4) (1400x826, 5.9 MB).</sub>
-
 ## The screens
 
 Ranked results, the candidate drawer beside the original document, the per-requirement
