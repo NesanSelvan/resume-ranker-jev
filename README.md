@@ -9,47 +9,27 @@ Jev scores one resume at a time; it never sees the corpus and never produces the
 ## Demo
 
 A full pass: load the corpus, rank it, open a candidate, inspect the per-requirement
-probabilities, and see the must-have gate filter someone out.
+probabilities, and watch the must-have gate filter someone out. Plays in place, 1.4x.
 
-[![Watch the 30-second demo](readme/demo-poster.png)](https://github.com/NesanSelvan/resume-ranker-jev/blob/main/readme/demo.mp4)
+![Loading the corpus, ranking it, and opening a candidate](readme/demo.gif)
 
-▶ **[Play the demo](https://github.com/NesanSelvan/resume-ranker-jev/blob/main/readme/demo.mp4)** — 30s, or click the still above.
+<sub>Full-resolution H.264 copy: [readme/demo.mp4](readme/demo.mp4) (1400x826, 5.9 MB).</sub>
 
-### Setup — one role, one corpus
+## The screens
 
-Requirements are free text, one per line; `!` marks a hard gate and `#` marks a note that is
-never scored. Every resume in the corpus is a document tile carrying the first lines of its
-own extracted text, so a bad extraction is visible before a run starts.
+Ranked results, the candidate drawer beside the original document, the per-requirement
+probabilities, and a candidate the must-have gate filtered out.
 
-![Setup screen with the corpus rail and the role requirements](readme/01-setup.png)
-
-### Ranked results
-
-Six rated dimensions per candidate, a requirement wheel, and a composite score ring. Weights
-re-sort the list in the browser without re-scoring anything.
-
-![Ranked candidate cards with rating bars and score rings](readme/02-ranked.png)
-
-### The candidate drawer
-
-The full breakdown sits beside the original document, so every number can be checked against
-the page it came from. Each rating carries the model's confidence.
-
-![Candidate drawer showing ratings beside the original PDF](readme/03-drawer.png)
-
-### Per-requirement probabilities
-
-One `noul()` call per requirement line, with the probability kept and shown. Must-haves are
-drawn taller than the rest.
-
-![Requirement breakdown listing each requirement with its probability](readme/04-requirements.png)
-
-### The gate, and what it costs
-
-A candidate who misses a must-have is moved to a Filtered tab **with the reason shown** — never
-deleted. For a DOCX, the drawer shows the extracted text, which is exactly what the scorer read.
-
-![A gated candidate beside the extracted text the scorer saw](readme/05-gated.png)
+<table>
+  <tr>
+    <td width="50%"><img src="readme/02-ranked.png" alt="Ranked candidate cards with rating bars and score rings" width="100%"></td>
+    <td width="50%"><img src="readme/03-drawer.png" alt="Candidate drawer showing ratings beside the original PDF" width="100%"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="readme/04-requirements.png" alt="Requirement breakdown listing each requirement with its probability" width="100%"></td>
+    <td width="50%"><img src="readme/05-gated.png" alt="A gated candidate beside the extracted text the scorer saw" width="100%"></td>
+  </tr>
+</table>
 
 ## How it works
 
